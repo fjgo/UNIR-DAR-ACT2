@@ -1,0 +1,156 @@
+<h2>Despliegue</h2>
+<p>
+  Una vez que tu aplicación está lista, puedes desplegarla en un servidor o
+  servicio en la nube. Angular CLI facilita el proceso de compilación y
+  optimización del código.
+</p>
+<h3>Compilar la aplicación</h3>
+<p>
+  Ejecuta el siguiente comando para generar los archivos de producción en la
+  carpeta <code>dist</code>:
+</p>
+<code>
+  <pre class="source bash">
+<span class="ex">ng</span> build --prod
+</pre>
+</code>
+<p>
+  Esto optimiza el código, comprimiendo los archivos y eliminando partes
+  innecesarias.
+</p>
+<p>
+  Esto crea una carpeta <code>dist/</code> con los archivos necesarios para
+  producción. Luego, puedes usar servicios como Firebase Hosting o GitHub Pages
+  para hospedar los archivos generados.
+</p>
+<h3>Desplegar en un servidor estático</h3>
+<p>
+  Puedes copiar los archivos generados en <code>dist</code> a cualquier servidor
+  web estático como <strong>Apache</strong>, <strong>Nginx</strong> o servicios
+  como GitHub Pages.
+</p>
+<strong>Ejemplo con Nginx</strong>
+<p>Configura el servidor para servir el archivo <code>index.html</code>:</p>
+<code>
+  <pre class="source nginx">
+<span class="section">server</span> &#123;
+  <span class="attribute">listen</span> <span class="number">80</span>;
+  <span class="attribute">server_name</span> ejemplo.com;
+
+  <span class="section">location</span> / &#123;
+    <span class="attribute">root</span> /ruta/a/dist/;
+    <span class="attribute">index</span> index.html;
+    <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.html;
+  &#125;
+&#125;
+</pre>
+</code>
+<h3>Despliegue en Firebase Hosting</h3>
+<p>
+  Firebase Hosting es una opción rápida y gratuita para desplegar aplicaciones
+  Angular:
+</p>
+<ol>
+  <li>
+    <p>Instala Firebase CLI:</p>
+    <code>
+      <pre class="source bash">
+<span class="ex">npm</span> install <span class="attr">-g</span> firebase-tools
+</pre>
+    </code>
+  </li>
+  <li>
+    <p>Autentica Firebase e inicializa el proyecto:</p>
+    <code>
+      <pre class="source bash">
+<span class="ex">firebase</span> login
+<span class="ex">firebase</span> init
+</pre>
+    </code>
+    <p>
+      Selecciona <strong>Firebase Hosting</strong> y proporciona la ruta de la
+      carpeta <code>dist</code>.
+    </p>
+  </li>
+  <li>
+    <p>Despliega la aplicación:</p>
+    <code>
+      <pre class="source bash">
+<span class="ex">firebase</span> deploy
+</pre>
+    </code>
+  </li>
+  <h3><strong>Despliegue en GitHub Pages</strong></h3>
+  <p>
+    GitHub Pages es un servicio gratuito que permite desplegar sitios web
+    estáticos directamente desde un repositorio de GitHub.
+  </p>
+  <ol>
+    <li>
+      <p>Crea un nuevo repositorio en GitHub:</p>
+    </li>
+    <li>
+      <p>
+        Ve a
+        <a href=" https://github.com/new" target="_blank"
+          >https://github.com/new</a
+        >
+        y crea un nuevo repositorio.
+      </p>
+    </li>
+    <li><p>Asigna un nombre y una descripción para el repositorio.</p></li>
+    <li>
+      <p>
+        Crea una nueva rama llamada <code>gh-pages</code> en el repositorio.
+      </p>
+    </li>
+    <li>
+      <p>
+        Configura el repositorio para desplegar la aplicación en GitHub Pages
+        seleccionando la rama <code>gh-pages</code> como fuente.
+      </p>
+    </li>
+    <li>
+      Añade el módulo <code>angular-cli-ghpages</code> de Angular para desplegar
+      la aplicación en GitHub Pages:
+      <code>
+        <pre class="source bash">
+<span class="ex">ng</span> add angular-cli-ghpages
+</pre>
+      </code>
+    </li>
+    <li>
+      <p>
+        Configura tu repositorio local para conectarlo con el repositorio de
+        GitHub.
+      </p>
+      <code>
+        <pre class="source bash">
+<span class="ex">git</span> remote add origin https://github.com/nombre-usuario/nombre-repositorio.git
+<span class="ex">git</span> branch <span class="attr">-M</span> main
+<span class="ex">git</span> push <span class="attr"></span>-u origin main
+</pre>
+      </code>
+    </li>
+
+    <li>
+      Despliega la aplicación en GitHub Pages:
+      <code>
+        <pre class="source bash">
+<span class="ex">ng</span> deploy
+</pre>
+      </code>
+    </li>
+  </ol>
+
+  <h3><strong>Conclusión</strong></h3>
+  <p>
+    Con esto concluye el tutorial de Angular. Hemos visto los fundamentos de
+    Angular, comenzando por la creación del esqueleto de una aplicación, la
+    creación de componentes y formularios hasta el despliegue en producción.
+  </p>
+  <p>
+    Ahora puedes crear aplicaciones robustas, escalables y de alto rendimiento
+    utilizando las mejores prácticas del framework.
+  </p>
+</ol>

@@ -1,0 +1,43 @@
+<div class="container">
+  <h1>Tutorial Angular</h1>
+  <nav>
+
+      <ng-container *ngFor="let link of links">
+        <a [routerLink]="link.path" routerLinkActive="active">{{
+          link.label
+        }}</a>
+      </ng-container>
+    </nav>
+
+    <router-outlet />
+
+    <div class="paginacion">
+      <button
+        mat-icon-button
+        [disabled]="!hasPreviousPage"
+        (click)="goToPreviousPage()"
+      >{{paginaAnterior}}
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        [disabled]="!hasNextPage"
+        (click)="goToNextPage()"
+      >{{paginaSiguiente}}
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+
+    <button
+      mat-icon-button
+      class="go-to-top"
+      *ngIf="showTopButton"
+      (click)="scrollToTop()"
+    >
+      <mat-icon>arrow_upward</mat-icon>
+    </button>
+
+    <footer>
+      <p>&copy; 2024 Tutorial Angular</p>
+    </footer>
+</div>

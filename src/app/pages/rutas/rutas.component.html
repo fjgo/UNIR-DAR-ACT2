@@ -1,0 +1,128 @@
+<h2>Rutas</h2>
+<p>
+  El <strong>enrutamiento</strong> es una de las características más importantes
+  en Angular, ya que permite la navegación entre diferentes vistas o páginas de
+  una aplicación sin recargar la página completa. A continuación, se describe
+  como configurar y utilizar el enrutamiento en Angular.
+</p>
+<h3>Configuración básica del enrutamiento</h3>
+<p>
+  En versiones anteriores de Angular el enrutamiento se habilitaba durante la
+  creación del proyecto (<code>ng new</code>) de Angular CLI. Si no se configuró
+  inicialmente, se podía agregar manualmente.
+</p>
+<p>
+  En las versiones más recientes de Angular, el enrutamiento se habilita por
+  defecto.
+</p>
+<h3>Definir rutas</h3>
+<p>
+  En el archivo <code>app.routes.ts</code> debemos importar los componentes a
+  los que deseemos navegar y define sus rutas:
+  <code>
+    <pre class="source typescript">
+<span class="keyword">import</span> &#123; <span class="title">NgModule</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;&#64;angular/core&#x27;</span>;
+<span class="keyword">import</span> &#123; <span class="title">RouterModule</span>, <span class="title">Routes</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;&#64;angular/router&#x27;</span>;
+<span class="keyword">import</span> &#123; <span class="title">HomeComponent</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./home/home.component&#x27;</span>;
+<span class="keyword">import</span> &#123; <span class="title">AboutComponent</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./about/about.component&#x27;</span>;
+
+<span class="keyword">const</span> <span class="attr">routes</span>: <span class="title">Routes</span> = [
+  &#123; <span class="attr">path</span>: <span class="string">&#x27;&#x27;</span>, <span class="attr">component</span>: <span class="title">HomeComponent</span> &#125;, <span class="comment">// Ruta raíz</span>
+  &#123; <span class="attr">path</span>: <span class="string">&#x27;about&#x27;</span>, <span class="attr">component</span>: <span class="title">AboutComponent</span> &#125;, <span class="comment">// Página About</span>
+];
+<span class="meta">&#64;NgModule</span>(&#123;
+  <span class="attr">imports</span>: [<span class="title">RouterModule</span>.<span class="title">forRoot</span>(routes)],
+  <span class="attr">exports</span>: [<span class="title">RouterModule</span>]
+&#125;)
+<span class="keyword">export</span> <span class="keyword">class</span> <span class="title">AppRoutingModule</span> &#123; &#125;
+</pre>
+  </code>
+</p>
+<h3>Uso de enlaces para navegar entre rutas</h3>
+<p>
+  Para navegar entre rutas definidas, utiliza la directiva
+  <code class="sourceCode">routerLink</code> en las plantillas HTML:
+  <code>
+    <pre class="source html">
+<span class="tag">&lt;<span class="name">nav</span>&gt;</span>
+  <span class="tag">&lt;<span class="name">a</span> <span class="attr">routerLink</span>=<span class="string">&quot;/&quot;</span>&gt;</span>Inicio<span class="tag">&lt;/<span class="name">a</span>&gt;</span>
+  <span class="tag">&lt;<span class="name">a</span> <span class="attr">routerLink</span>=<span class="string">&quot;/about&quot;</span>&gt;</span>Sobre Nosotros<span class="tag">&lt;/<span class="name">a</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">nav</span>&gt;</span>
+</pre>
+  </code>
+</p>
+<p>
+  La directiva <code>routerLink</code> reemplaza el atributo
+  <code>href</code> tradicional y permite que la navegación sea manejada por
+  Angular sin recargar la página.
+</p>
+<h3>Mostrar contenido usando <code>&lt;router-outlet&gt;</code></h3>
+<p>
+  Para renderizar el componente asociado a una ruta, debes agregar la etiqueta
+  especial <code>&lt;router-outlet&gt;</code> en la plantilla principal de tu
+  aplicación, generalmente en <code>app.component.html</code>:
+  <code>
+    <pre class="source html">
+<span class="tag">&lt;<span class="name">router-outlet</span>&gt;</span><span class="tag">&lt;/<span class="name">router-outlet</span>&gt;</span>
+</pre>
+  </code>
+</p>
+<h3>Parámetros de ruta</h3>
+<p>
+  Angular permite pasar parámetros en las rutas, lo que facilita mostrar
+  contenido dinámico. Por ejemplo, puedes definir una ruta con parámetros como
+  esta:
+  <code>
+    <pre class="source typescript">
+&#123; <span class="attr">path</span>: <span class="string">&#x27;producto/:id&#x27;</span>, <span class="attr">component</span>: <span class="title">ProductoComponent</span> &#125;
+</pre>
+  </code>
+</p>
+<p>
+  En el componente, recupera el parámetro usando
+  <code>ActivatedRoute</code>:
+  <code>
+    <pre class="source typescript">
+<span class="keyword">import</span> &#123; <span class="title">ActivatedRoute</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;&#64;angular/router&#x27;</span>;
+
+<span class="keyword">export</span> <span class="keyword">class</span> <span class="title">ProductoComponent</span> &#123;
+  <span class="attr">id</span>: <span class="built_in">string</span>;
+  <span class="title">constructor</span>(<span class="params"><span class="keyword">private</span> route: ActivatedRoute</span>) &#123;
+    <span class="variable">this</span>.<span class="property">id</span> = <span class="variable">this</span>.<span class="property">route</span>.<span class="property">snapshot</span>.<span class="property">paramMap</span>.<span class="title">get</span>(<span class="string">&#x27;id&#x27;</span>)!;
+  &#125;
+&#125;
+</pre>
+  </code>
+</p>
+<p>
+  De esta forma para la URL: <code>/producto/123</code> tendremos que
+  <code>id</code> será <code>123</code>.
+</p>
+<h3>Redirecciones y rutas wildcard</h3>
+<p>
+  <strong>Redirección</strong>: Puedes configurar rutas para redirigir a otra
+  ruta predeterminada:
+  <code>
+    <pre class="source typescript">
+&#123; <span class="attr">path</span>: <span class="string">&#x27;&#x27;</span>, <span class="attr">redirectTo</span>: <span class="string">&#x27;/inicio&#x27;</span>, <span class="attr">pathMatch</span>: <span class="string">&#x27;full&#x27;</span> &#125;
+</pre>
+  </code>
+</p>
+<p>
+  <strong>Ruta wildcard</strong>: Maneja rutas no definidas, mostrando una
+  página de error 404:
+  <code>
+    <pre class="source typescript">
+&#123; <span class="attr">path</span>: <span class="string">&#x27;**&#x27;</span>, <span class="attr">component</span>: <span class="title">PaginaNoEncontradaComponent</span> &#125;
+</pre>
+  </code>
+</p>
+<p>
+  El enrutamiento en Angular te permite gestionar la navegación dentro de tu
+  aplicación de forma eficiente y sin recargas.
+</p>
+<p>
+  Con <code>routerLink</code>, <code>&lt;router-outlet&gt;</code> y el manejo de
+  parámetros, podemos crear aplicaciones que sean fáciles de navegar y
+  dinámicas.
+</p>

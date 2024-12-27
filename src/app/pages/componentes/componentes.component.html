@@ -1,0 +1,80 @@
+<h2>Componentes</h2>
+<p>
+  Angular se basa en una arquitectura de componentes. Cada componente es una
+  pieza independiente de la interfaz de usuario y contiene su propia lógica y
+  vista. A continuación, aprenderemos a crear componentes en Angular:
+</p>
+<p>
+  <strong>Generar un componente</strong>: Utiliza Angular CLI para crear un
+  nuevo componente. El siguiente comando generará automáticamente los archivos
+  necesarios:
+</p>
+<code>
+  <pre class="source bash">
+<span class="ex">ng</span> generate component nombre-componente
+</pre>
+</code>
+<p>
+  Esto creará una carpeta con los archivos
+  <code>nombre-componente.component.ts</code>,
+  <code>nombre-componente.component.html</code>,
+  <code>nombre-componente.component.css</code> y
+  <code>nombre-componente.component.spec.ts</code>.
+</p>
+<p><strong>Estructura de un componente</strong>:</p>
+<ul>
+  <li>
+    <strong>TypeScript (<code>.ts</code>)</strong>: Incluye la lógica y los
+    datos del componente. Este archivo define una clase que contiene las
+    propiedades y métodos utilizados en la plantilla HTML.
+  </li>
+  <li>
+    <strong>HTML (<code>.html</code>)</strong>: Define la plantilla que se
+    renderizará.
+  </li>
+  <li>
+    <strong>CSS/SCSS (<code>.css</code>)</strong>: Contiene los estilos
+    aplicados al componente. Tambien puedes usar SCSS o LESS segun la
+    configuracion del proyecto.
+  </li>
+  <li>
+    <strong>Pruebas (<code>.spec.ts</code>)</strong>: Permite realizar pruebas
+    unitarias. Angular CLI genera automáticamente un archivo
+    <code>.spec.ts</code> para cada componente.
+  </li>
+</ul>
+<p>
+  <strong>Uso del componente</strong>: Una vez generado, puedes usar el selector
+  del componente en cualquier archivo HTML. Por ejemplo:
+</p>
+<code>
+  <pre class="source html">
+<span class="tag">&lt;<span class="name">app-nombre-componente</span>&gt;</span><span class="tag">&lt;/<span class="name">app-nombre-componente</span>&gt;</span>
+</pre>
+</code>
+<p>
+  <strong>Comunicación entre componentes</strong>: Angular permite la
+  comunicación mediante <code>&#64;Input</code> y <code>&#64;Output</code> para
+  pasar datos y eventos entre componentes padre e hijo.
+</p>
+<p>
+  Además, los componentes pueden comunicarse entre sí utilizando
+  <strong>Input</strong> y <strong>Output</strong>. Esto permite pasar datos
+  desde un componente padre a uno hijo y viceversa. Por ejemplo:
+</p>
+<p>En el componente padre:</p>
+<code>
+  <pre class="source html">
+<span class="tag">&lt;<span class="name">app-inicio</span> [<span class="attr">titulo</span>]=<span class="string">&quot;&#x27;Bienvenido&#x27;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">app-inicio</span>&gt;</span>
+</pre>
+</code>
+<p>En el componente hijo:</p>
+<code>
+  <pre class="source typescript">
+<span class="meta">&#64;Input</span>() <span class="attr">titulo</span>: <span class="built_in">string</span>;
+</pre>
+</code>
+<p>
+  Esta interacción entre componentes es esencial para construir aplicaciones
+  dinámicas y modulares.
+</p>
